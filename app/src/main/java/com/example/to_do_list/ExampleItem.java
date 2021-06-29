@@ -23,7 +23,10 @@ public class ExampleItem implements Parcelable {
         mImageResource = in.readString();
         mLine1 = in.readString();
         mLine2 = in.readString();
+
     }
+
+
 
     public static final Parcelable.Creator<ExampleItem> CREATOR = new Creator<ExampleItem>() {
         @Override

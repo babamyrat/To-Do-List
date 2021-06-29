@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.setTitle("главный меню");
+
 
         loadData();
         buildRecyclerView();
@@ -47,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadData() {
 
+    private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
@@ -58,6 +60,19 @@ public class MainActivity extends AppCompatActivity {
             mExampleList = new ArrayList<>();
         }
 
+    }
+
+    public void removeItem(int position){
+        //delete
+        mExampleList.remove(position);
+        mAdapter.notifyItemRemoved(position);
+        //save
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mExampleList);
+        editor.putString("task list", json);
+        editor.apply();
     }
 
 
@@ -77,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("Example Item", mExampleList.get(position));
 
                 startActivity(intent);
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
             }
         });
 

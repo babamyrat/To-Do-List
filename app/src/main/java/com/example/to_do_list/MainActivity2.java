@@ -27,7 +27,9 @@ public class MainActivity2 extends AppCompatActivity {
     int SELECT_IMAGE_CODE = 1;
     Button btn_back, buttonInsert, btn_clear;
     ImageView up_image;
-    EditText line1,line2, uris;
+    EditText line1,line2;
+    private  String url_address;
+
 
 
 
@@ -42,7 +44,9 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        uris = findViewById(R.id.edittext_line_2);
+        this.setTitle("Добавить задачу");
+
+       // uris = findViewById(R.id.edittext_line_2);
 
         setInsertButton();
         loadData();
@@ -95,7 +99,7 @@ public class MainActivity2 extends AppCompatActivity {
                 //  up_image = findViewById(R.id.up_image);
                 line1 = findViewById(R.id.edittext_line_1);
                 line2 = findViewById(R.id.edittext_line_2);
-                insertItem(up_image.toString(), line1.getText().toString(), line2.getText().toString());
+                insertItem(url_address, line1.getText().toString(), line2.getText().toString());
 
 
 
@@ -150,6 +154,8 @@ public class MainActivity2 extends AppCompatActivity {
                 Bitmap uri = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
 
                 up_image.setImageBitmap(uri);
+
+                url_address = imageUri.toString();
 
 
             } catch (IOException e) {

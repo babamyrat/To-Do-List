@@ -2,9 +2,11 @@ package com.example.to_do_list;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,18 +21,28 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        this.setTitle("Экран просмотра задаче");
+
         btn01 = findViewById(R.id.btn01);
         startButton();
 
         Intent intent = getIntent();
         ExampleItem exampleItem = intent.getParcelableExtra("Example Item");
 
-        String imageRes = exampleItem.getImageResource();
         String line1 = exampleItem.getLine1();
         String line2 = exampleItem.getLine2();
 
-//            ImageView imageView = findViewById(R.id.imageView);
-//            imageView.setImageResource(getImageId(this,imageRes));
+        ImageView imageView = findViewById(R.id.imageView);
+
+            try {
+                String imageRes = exampleItem.getImageResource();
+                imageView.setImageURI(Uri.parse(imageRes));
+            } catch (Exception ignored) {
+
+            }
+
+
+
 
         TextView textView1 = findViewById(R.id.textView_name);
         textView1.setText(line1);
