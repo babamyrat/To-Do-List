@@ -10,19 +10,22 @@ public class ExampleItem implements Parcelable {
     private String mImageResource;
     private String mLine1;
     private String mLine2;
+    private String mTimeDate;
 
 
 
-    public ExampleItem(String up_image, String line1, String line2) {
+    public ExampleItem(String up_image, String line1, String line2, String timeDate) {
         mImageResource = up_image;
         mLine1 = line1;
         mLine2 = line2;
+        mTimeDate = timeDate;
     }
 
     protected ExampleItem(Parcel in) {
         mImageResource = in.readString();
         mLine1 = in.readString();
         mLine2 = in.readString();
+        mTimeDate = in.readString();
 
     }
 
@@ -55,6 +58,10 @@ public class ExampleItem implements Parcelable {
         return mLine2;
     }
 
+    public String getTimeDate() {
+        return mTimeDate;
+    }
+
 
 
     @Override
@@ -67,6 +74,7 @@ public class ExampleItem implements Parcelable {
         dest.writeString(mImageResource);
         dest.writeString(mLine1);
         dest.writeString(mLine2);
+        dest.writeString(mTimeDate);
     }
 
 

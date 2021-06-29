@@ -15,13 +15,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
     int SELECT_IMAGE_CODE = 1;
@@ -29,6 +34,7 @@ public class MainActivity2 extends AppCompatActivity {
     ImageView up_image;
     EditText line1,line2;
     private  String url_address;
+    private String timeDate;
 
 
 
@@ -53,7 +59,15 @@ public class MainActivity2 extends AppCompatActivity {
         buildRecyclerView();
         Btn_back();
         ImageAll();
+        getDate();
 
+    }
+
+    private void getDate() {
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        timeDate = (dateFormat.format(date));
     }
 
 
@@ -96,10 +110,9 @@ public class MainActivity2 extends AppCompatActivity {
         buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  up_image = findViewById(R.id.up_image);
                 line1 = findViewById(R.id.edittext_line_1);
                 line2 = findViewById(R.id.edittext_line_2);
-                insertItem(url_address, line1.getText().toString(), line2.getText().toString());
+                insertItem(url_address, line1.getText().toString(), line2.getText().toString(),timeDate);
 
 
 
@@ -107,8 +120,8 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
-    private void insertItem(String up_image, String line1, String line2) {
-        mExampleList.add(new ExampleItem(up_image, line1, line2));
+    private void insertItem(String up_image, String line1, String line2, String timeDate ) {
+        mExampleList.add(new ExampleItem(up_image, line1, line2, timeDate));
         mAdapter.notifyItemInserted(mExampleList.size());
     }
 
@@ -120,6 +133,9 @@ public class MainActivity2 extends AppCompatActivity {
         editor.putString("task list", json);
         editor.apply();
     }
+
+
+
 
 
 

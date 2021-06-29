@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
 
 
-
     private ArrayList<ExampleItem> mExampleList;
     private OnItemClickListener mListener;
 
@@ -31,7 +30,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
 
 
-        public ImageView mImageView;
+        public TextView mTimeDate;
         public TextView mTextViewLine1;
         public TextView mTextViewLine2;
         public ImageView mDeleteImage;
@@ -40,7 +39,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
             super(itemView);
 
-          //  mImageView = itemView.findViewById(R.id.imageView);
+            mTimeDate = itemView.findViewById(R.id.timeDate);
             mTextViewLine1 = itemView.findViewById(R.id.textview_line1);
             mTextViewLine2 = itemView.findViewById(R.id.textview_line_2);
             mDeleteImage = itemView.findViewById(R.id.image_delete);
@@ -87,6 +86,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleItem currentItem = mExampleList.get(position);
         holder.mTextViewLine1.setText(currentItem.getLine1());
         holder.mTextViewLine2.setText(currentItem.getLine2());
+        holder.mTimeDate.setText(currentItem.getTimeDate());
     }
 
     @Override
