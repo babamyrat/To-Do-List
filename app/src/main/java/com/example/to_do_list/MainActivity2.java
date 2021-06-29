@@ -52,7 +52,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         this.setTitle("Добавить задачу");
 
-       // uris = findViewById(R.id.edittext_line_2);
+
 
         setInsertButton();
         loadData();
@@ -120,8 +120,8 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
-    private void insertItem(String up_image, String line1, String line2, String timeDate ) {
-        mExampleList.add(new ExampleItem(up_image, line1, line2, timeDate));
+    private void insertItem(String url_address, String line1, String line2, String timeDate ) {
+        mExampleList.add(new ExampleItem(url_address, line1, line2, timeDate));
         mAdapter.notifyItemInserted(mExampleList.size());
     }
 
