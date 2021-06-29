@@ -28,13 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.setTitle("Главный меню");
-
-
         loadData();
         buildRecyclerView();
         next_add_task();
     }
-
 
     private void  next_add_task() {
         Button buttonSave = findViewById(R.id.btn_add_task);
@@ -43,12 +40,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                 startActivity(intent);
-
             }
         });
     }
-
-
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -59,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         if (mExampleList == null) {
             mExampleList = new ArrayList<>();
         }
-
     }
 
     public void removeItem(int position){
@@ -75,13 +68,11 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-
     private void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ExampleAdapter(mExampleList);
-
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -90,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Intent intent = new Intent(MainActivity.this, MainActivity3.class);
                 intent.putExtra("Example Item", mExampleList.get(position));
-
                 startActivity(intent);
             }
 
@@ -99,8 +89,5 @@ public class MainActivity extends AppCompatActivity {
                 removeItem(position);
             }
         });
-
     }
-
-
 }

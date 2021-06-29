@@ -1,6 +1,5 @@
 package com.example.to_do_list;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,25 +13,30 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity3 extends AppCompatActivity {
 
-    Button btn01;
+    private Button btn01;
+            TextView textView1, textView2, textView3;
+            ImageView imageView;
+            String line1, line2, timeDate;
+            Intent intent;
+            ExampleItem exampleItem;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        this.setTitle("Экран просмотра задаче");
-
+        this.setTitle("Просмотр задач");
         btn01 = findViewById(R.id.btn01);
         startButton();
 
-        Intent intent = getIntent();
-        ExampleItem exampleItem = intent.getParcelableExtra("Example Item");
+        intent = getIntent();
+        exampleItem = intent.getParcelableExtra("Example Item");
 
-        String line1 = exampleItem.getLine1();
-        String line2 = exampleItem.getLine2();
+        line1 = exampleItem.getLine1();
+        line2 = exampleItem.getLine2();
+        timeDate = exampleItem.getTimeDate();
 
-        ImageView imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
 
             try {
                 String imageRes = exampleItem.getImageResource();
@@ -41,21 +45,19 @@ public class MainActivity3 extends AppCompatActivity {
 
             }
 
-
-
-
-        TextView textView1 = findViewById(R.id.textView_name);
+        textView1 = findViewById(R.id.textView_name);
         textView1.setText(line1);
 
-        TextView textView2 = findViewById(R.id.textView_text);
+        textView2 = findViewById(R.id.textView_text);
         textView2.setText(line2);
 
+        textView3 = findViewById(R.id.timeDate);
+        textView3.setText(timeDate);
 
     }
 
     private void startButton() {
         btn01.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 BackActivity();
@@ -67,9 +69,4 @@ public class MainActivity3 extends AppCompatActivity {
             }
         });
     }
-
-    public static int getImageId(Context context, String imageName) {
-        return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
-    }
-
 }

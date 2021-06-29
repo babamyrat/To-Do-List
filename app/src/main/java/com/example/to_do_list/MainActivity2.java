@@ -29,21 +29,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity2 extends AppCompatActivity {
+
     int SELECT_IMAGE_CODE = 1;
-    Button btn_back, buttonInsert, btn_clear;
-    ImageView up_image;
-    EditText line1,line2;
-    private  String url_address;
-    private String timeDate;
-
-
-
-
     ArrayList<ExampleItem> mExampleList;
-    private ExampleAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-
+    private  ExampleAdapter mAdapter;
+    private  Button btn_back, buttonInsert;
+    private  ImageView up_image;
+    private  EditText line1,line2;
+    private  String url_address, timeDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +44,12 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         this.setTitle("Добавить задачу");
-
-
-
         setInsertButton();
         loadData();
         buildRecyclerView();
         Btn_back();
         ImageAll();
         getDate();
-
     }
 
     private void getDate() {
@@ -70,20 +59,14 @@ public class MainActivity2 extends AppCompatActivity {
         timeDate = (dateFormat.format(date));
     }
 
-
     private void Btn_back() {
         btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                startActivity(intent);
-
-            }
+        btn_back.setOnClickListener(v -> {
+            saveData();
+            Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+            startActivity(intent);
         });
     }
-
 
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
@@ -94,29 +77,18 @@ public class MainActivity2 extends AppCompatActivity {
         if (mExampleList == null) {
             mExampleList = new ArrayList<>();
         }
-
     }
 
-
     private void buildRecyclerView() {
-        mLayoutManager = new LinearLayoutManager(this);
         mAdapter = new ExampleAdapter(mExampleList);
     }
 
-
-
     private void setInsertButton() {
         buttonInsert = findViewById(R.id.button_insert);
-        buttonInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                line1 = findViewById(R.id.edittext_line_1);
-                line2 = findViewById(R.id.edittext_line_2);
-                insertItem(url_address, line1.getText().toString(), line2.getText().toString(),timeDate);
-
-
-
-            }
+        buttonInsert.setOnClickListener(v -> {
+            line1 = findViewById(R.id.edittext_line_1);
+            line2 = findViewById(R.id.edittext_line_2);
+            insertItem(url_address, line1.getText().toString(), line2.getText().toString(),timeDate);
         });
     }
 
@@ -134,53 +106,30 @@ public class MainActivity2 extends AppCompatActivity {
         editor.apply();
     }
 
-
-
-
-
-
-    //--------------------------------------------------------------------//
-
-
     private void ImageAll() {
         up_image = findViewById(R.id.up_image);
-        up_image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
-            }
+        up_image.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
         });
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == SELECT_IMAGE_CODE && resultCode == RESULT_OK && data != null) {
-
             Uri imageUri = data.getData();
 
             try {
                 Bitmap uri = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
-
                 up_image.setImageBitmap(uri);
-
                 url_address = imageUri.toString();
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
-
-
     }
 }
