@@ -4,6 +4,8 @@ package com.example.to_do_list;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
+public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> implements Filterable{
 
     private ArrayList<ExampleItem> mExampleList;
+    private ArrayList<ExampleItem> mExampleListFull; //full code
+
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener {
@@ -58,8 +62,10 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     }
 
     public ExampleAdapter(ArrayList<ExampleItem> exampleList) {
-        mExampleList = exampleList;
+        this.mExampleList = exampleList;   //this add
+        mExampleListFull = new ArrayList<>(mExampleList); //add full code
     }
+
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -81,4 +87,40 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         return mExampleList.size();
     }
 
+    @Override
+    public Filter getFilter() {
+        return mExampleFilter;
+    }
+
+    private Filter mExampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<ExampleItem> filteredArrayList = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0){
+                filteredArrayList.addAll(mExampleListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (ExampleItem item : mExampleListFull){
+                    if (item.getLine1().toLowerCase().contains(filterPattern)){
+                        filteredArrayList.add(item);
+
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredArrayList;
+
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+          mExampleList.clear();
+          mExampleList.addAll((ArrayList) results.values);
+          notifyDataSetChanged();
+        }
+    };
 }
