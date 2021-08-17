@@ -38,11 +38,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
+
             mTimeDate = itemView.findViewById(R.id.timeDate);
             mTextViewLine1 = itemView.findViewById(R.id.textview_line1);
             mTextViewLine2 = itemView.findViewById(R.id.textview_line_2);
             mDeleteImage = itemView.findViewById(R.id.image_delete);
-             //ItemClick
+
+            //ItemClick
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     int position = getAdapterPosition();
@@ -51,6 +53,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                     }
                 }
             });
+
           // delete task
             mDeleteImage.setOnClickListener(v -> {
                 int position = getAdapterPosition();
@@ -65,7 +68,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         this.mExampleList = exampleList;   //this add
         mExampleListFull = new ArrayList<>(mExampleList); //add full code
     }
-
 
     @Override
     public ExampleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

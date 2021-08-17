@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:hapticFeedbackEnabled="false"
     tools:context=".MainActivity2">
 
     <Button
@@ -14,6 +16,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="285dp"
         android:text="Назад"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +49,8 @@
         android:ems="10"
         android:hint="Введение название"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
@@ -54,6 +59,7 @@
 
     <EditText
         android:id="@+id/edittext_line_2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="341dp"
         android:layout_height="266dp"
         android:layout_marginStart="30dp"
@@ -64,8 +70,9 @@
         android:inputType="textMultiLine"
         android:maxLines="50"
         android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textSize="20dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edittext_line_1" />
@@ -77,6 +84,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
+        android:background="#878787"
         android:src="@drawable/ic_add_photo_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView6"
@@ -91,6 +99,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:text="Добавить фото:"
+        android:textColor="@color/black"
         android:textSize="28dp"
         app:layout_constraintEnd_toStartOf="@+id/up_image"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +113,7 @@
         android:layout_marginBottom="43dp"
         android:padding="10dp"
         android:text="Сахранить"
+        android:textColor="@color/white"
         android:textSize="18dp"
         app:backgroundTint="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="parent"
